@@ -8,7 +8,21 @@ app = Flask(__name__)
 LINE_TOKEN = "UKbyHQKiPLZA3+s6jcUWO8S3lNpLrX97T1nMULS1asZn6C/ImazRC9BcyfAYiUwP05IJGdD+ntZBH7nH0XDmG+XGSuDfypOt9cVaA9cICLEmk1snoGWy8MFPYEoi4r7F2jbJU/x61eR70ZqEOAWX4QdB04t89/1O/w1cDnyilFU="
 DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1298550454736781312/M1oB9ddkCpn0ET1jBuepmGzLxGngIBHHLbBLJrjZic_ddUQF4C8fISx9UP5h7hXW570A"
 
-# 用來請求 LINE 用戶資料的函式
+# 獲取 LINE 群組名稱的函式
+def get_group_name(group_id):
+    url = f"https://api.line.me/v2/bot/group/{group_id}/summary"
+    headers = {
+        "Authorization": f"Bearer {LINE_TOKEN}"
+    }
+    response = requests.get(url, headers=headers)
+    
+    if response.status_code == 200:
+        return response.json().get('groupName')  # 返回群組名稱
+    else:
+        print(f"無法獲取群組名稱，狀態碼: {response.status_code}")
+        return None
+
+# 獲取 LINE 用戶資料的函式
 def get_line_user_profile(user_id, group_id=None, room_id=None):
     if group_id:
         url = f"https://api.line.me/v2/bot/group/{group_id}/member/{user_id}"
@@ -56,7 +70,11 @@ def handle_message(message, user_id, group_id=None, room_id=None):
     if user_profile:
         user_name = user_profile['displayName']
         if group_id:
-            content = f"來自群組 {group_id} 的 {user_name} ：{message}"
+            group_name = get_group_name(group_id)
+            if group_name:
+                content = f"來自群組 {group_name} 的 {user_name} ：{message}"
+            else:
+                content = f"來自群組 {group_id} 的 {user_name} ：{message}"  # 無法獲取群組名稱時顯示 group_id
         elif room_id:
             content = f"來自聊天室的 {user_name} ：{message}"
         else:
