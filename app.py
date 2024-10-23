@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, jsonify
 import requests
 
@@ -31,5 +32,6 @@ def send_to_discord(message):
         print(f"傳送失敗，狀態碼：{response.status_code}")
 
 if __name__ == "__main__":
-    # 本地測試時使用，執行伺服器
-    app.run(debug=True, port=5000)
+    # Render 會使用 PORT 環境變數指定的端口
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
