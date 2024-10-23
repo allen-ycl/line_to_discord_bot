@@ -56,13 +56,13 @@ def handle_message(message, user_id, group_id=None, room_id=None):
     if user_profile:
         user_name = user_profile['displayName']
         if group_id:
-            content = f"來自群組的 {user_name} 的 LINE 訊息：{message}"
+            content = f"來自群組 {group_id} 的 {user_name} ：{message}"
         elif room_id:
-            content = f"來自聊天室的 {user_name} 的 LINE 訊息：{message}"
+            content = f"來自聊天室的 {user_name} ：{message}"
         else:
-            content = f"來自 {user_name} 的 LINE 訊息：{message}"
+            content = f"來自 {user_name} ：{message}"
     else:
-        content = f"來自未知用戶的 LINE 訊息：{message}"
+        content = f"來自未知用戶：{message}"
     
     send_to_discord(content)
 
