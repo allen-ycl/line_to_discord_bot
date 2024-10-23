@@ -5,7 +5,7 @@ import requests
 app = Flask(__name__)
 
 LINE_TOKEN = "UKbyHQKiPLZA3+s6jcUWO8S3lNpLrX97T1nMULS1asZn6C/ImazRC9BcyfAYiUwP05IJGdD+ntZBH7nH0XDmG+XGSuDfypOt9cVaA9cICLEmk1snoGWy8MFPYEoi4r7F2jbJU/x61eR70ZqEOAWX4QdB04t89/1O/w1cDnyilFU="
-DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1298550454736781312/M1oB9ddkCpn0ET1jBuepmGzLxGngIBHHLbBLJrZic_ddUQF4C8fISx9UP5h7hXW570A"
+DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1298550454736781312/M1oB9ddkCpn0ET1jBuepmGzLxGngIBHHLbBLJrjZic_ddUQF4C8fISx9UP5h7hXW570A"
 
 # 接收來自 LINE 的 Webhook 請求
 @app.route("/webhook", methods=['POST'])
