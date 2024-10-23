@@ -6,7 +6,7 @@ from threading import Thread
 app = Flask(__name__)
 
 LINE_TOKEN = "UKbyHQKiPLZA3+s6jcUWO8S3lNpLrX97T1nMULS1asZn6C/ImazRC9BcyfAYiUwP05IJGdD+ntZBH7nH0XDmG+XGSuDfypOt9cVaA9cICLEmk1snoGWy8MFPYEoi4r7F2jbJU/x61eR70ZqEOAWX4QdB04t89/1O/w1cDnyilFU="
-DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/你的WebhookURL"
+DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1298550454736781312/M1oB9ddkCpn0ET1jBuepmGzLxGngIBHHLbBLJrjZic_ddUQF4C8fISx9UP5h7hXW570A"
 
 # 用來請求 LINE 用戶資料的函式
 def get_line_user_profile(user_id, group_id=None, room_id=None):
