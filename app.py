@@ -12,15 +12,20 @@ DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1298550454736781312/M1oB
 def webhook():
     data = request.json
     print("接收到的 LINE 資料:", data)  # 打印收到的 LINE 訊息
-
-    if 'events' in data:
+    
+    # 檢查 data 中是否有 events 且 events 列表不為空
+    if 'events' in data and len(data['events']) > 0:
         event = data['events'][0]
         if event['type'] == 'message' and 'text' in event['message']:
             message = event['message']['text']
             print(f"接收到的訊息: {message}")  # 打印接收到的訊息
             # 傳送訊息至 Discord
             send_to_discord(message)
-    return jsonify({'status': 'success'})
+        else:
+            print("非文字訊息或未找到訊息內容")
+    else:
+        print("未接收到有效的 events")
+    return jsonify({'status': 'success'}), 200  # 返回 200 狀態碼以避免 500 錯誤
 
 # 將收到的 LINE 訊息發送到 Discord
 def send_to_discord(message):
